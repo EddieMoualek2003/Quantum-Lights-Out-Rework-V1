@@ -9,14 +9,14 @@ import time
 from random import choice
 
 ## Modulation of "lights_out" Functions for Improved Readability.
-from lights_out import lights_out_consants
 from lights_out_func import *
+from lights_out_consants import *
 
 ## Array containing the initial lights out grid values
-lights = lights_out_consants.return_lights()
+lights = return_lights()
 
 ## Dictionary that corelates the grid index to an index on the LED array (Centered in the LED array)
-LED_array_indices = lights_out_consants.return_LED_array_indices()
+LED_array_indices = return_LED_array_indices()
 
 ## Main function the can be called and ran.
 def lights_out_main(**kwargs):
