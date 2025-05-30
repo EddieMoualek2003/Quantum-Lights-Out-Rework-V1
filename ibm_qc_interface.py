@@ -90,7 +90,7 @@ def quantum_execute_evolved(simulator, circuit):
 
     return pub_result.data.meas.get_counts()
 
-def noisy_simulator(qc, shots):
+def noisy_simulator(qc):
     # Use fake noisy backend
     fake_backend = FakeManilaV2()
     noise_model = NoiseModel.from_backend(fake_backend)
@@ -98,9 +98,8 @@ def noisy_simulator(qc, shots):
 
     # Transpile circuit
     qc_t = transpile(qc, simulator)
-
     # Run simulation
-    job = simulator.run(qc_t, shots=8192)
+    job = simulator.run(qc_t, shots=1024)
     result = job.result()
     counts = result.get_counts()
     return counts

@@ -9,18 +9,22 @@ import time
 from random import choice
 
 ## Modulation of "lights_out" Functions for Improved Readability.
+import lights_out_consants
 from lights_out_func import *
-from lights_out_consants import *
+from lights_out_display import *
 
 ## Array containing the initial lights out grid values
-lights = return_lights()
+lights = lights_out_consants.return_lights()
 
 ## Dictionary that corelates the grid index to an index on the LED array (Centered in the LED array)
-LED_array_indices = return_LED_array_indices()
+LED_array_indices = lights_out_consants.return_LED_array_indices()
+
+from sense_emu import SenseHat
 
 ## Main function the can be called and ran.
 def lights_out_main(**kwargs):
     args = parse_arguments()
+    hat = SenseHat()
     try:
         while True:
             print("Starting Quantum Lights Out Solver!")
@@ -28,9 +32,13 @@ def lights_out_main(**kwargs):
             lights_grid = choice(lights).copy()
             print("Grid chosen:", lights_grid)
             print("Computing quantum solution...")
+            start = time.time()
             quantum_solution = compute_quantum_solution(lights_grid)
+            end = time.time()
+            print(f"Execution time: {end - start:.4f} seconds")
             print(f"Quantum solution found! {quantum_solution}")
-            # print("Visualizing solution...")
+            print("Visualizing solution...")
+            visualize_solution_on_sensehat(hat = hat, initial_grid=lights_grid, bitstring_solution=quantum_solution)
             # visualize_solution(lights_grid, quantum_solution, args)
             print("\n")
     except Exception as e:
