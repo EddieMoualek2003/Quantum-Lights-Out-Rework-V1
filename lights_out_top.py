@@ -9,15 +9,15 @@ import time
 from random import choice
 
 ## Modulation of "lights_out" Functions for Improved Readability.
-import lights_out_consants
+from lights_out_consants import *
 from lights_out_func import *
 from lights_out_display import *
 
 ## Array containing the initial lights out grid values
-lights = lights_out_consants.return_lights()
+lights = return_lights()
 
 ## Dictionary that corelates the grid index to an index on the LED array (Centered in the LED array)
-LED_array_indices = lights_out_consants.return_LED_array_indices()
+LED_array_indices = return_LED_array_indices()
 
 from sense_emu import SenseHat
 
